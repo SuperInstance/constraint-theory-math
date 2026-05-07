@@ -45,18 +45,18 @@ class HexGraph:
                     edges.add(edge)
         self._edges = sorted(edges)
 
-        # Triangular faces: for each vertex, two canonical triangles
-        # "up" triangle: (q,r), (q+1,r), (q,r+1)
-        # These are the only triangles in the triangular lattice
+        # Triangular faces: for each vertex, check all 6 consecutive
+        # neighbor pairs (each pair forms an elementary triangle)
         faces = set()
         for v in self._vertices:
-            q, r = v
-            # "up" triangle
-            a = (q + 1, r)
-            b = (q, r + 1)
-            if a in vert_set and b in vert_set:
-                tri = tuple(sorted([v, a, b]))
-                faces.add(tri)
+            for i in range(6):
+                du1, dv1 = self.UNITS[i]
+                du2, dv2 = self.UNITS[(i + 1) % 6]
+                a = (v[0] + du1, v[1] + dv1)
+                b = (v[0] + du2, v[1] + dv2)
+                if a in vert_set and b in vert_set:
+                    tri = tuple(sorted([v, a, b]))
+                    faces.add(tri)
         self._faces = sorted(faces)
 
     def vertices(self) -> list:
@@ -108,18 +108,24 @@ class HexGraph:
     def propagate_constraints(self, seed: dict) -> dict:
         """O(V) constraint propagation from seeds along spanning tree.
         
-        1. Build spanning tree (BFS from any root)
-        2. Propagate edge values from seeds along tree edges
-        3. Non-tree edges get values from face closure
-        4. Return all edge values
+        Strategy: propagate potentials along BFS tree, then compute
+        all edge values as potential differences. This guarantees
+        face closure (holonomy = 0) for all triangles.
+        
+        1. Build spanning tree (BFS from root)
+        2. Use seed edge values to set potential differences
+        3. Propagate potentials: φ(child) = φ(parent) + edge_value(parent, child)
+        4. Compute all edge values: edge(u,v) = φ(v) - φ(u)
         """
         if not self._vertices:
             return {}
 
-        # BFS spanning tree
         root = self._vertices[0]
+
+        # BFS to get parent pointers and tree edge order
         visited = {root}
-        tree_edges = set()
+        parent = {root: None}
+        order = [root]
         queue = deque([root])
 
         while queue:
@@ -127,28 +133,37 @@ class HexGraph:
             for nb in self._adj[node]:
                 if nb not in visited:
                     visited.add(nb)
-                    tree_edges.add(tuple(sorted([node, nb])))
+                    parent[nb] = node
+                    order.append(nb)
                     queue.append(nb)
 
-        # Start with seed values
-        edge_values = dict(seed)
+        # Build a lookup for seed values (both directions)
+        def get_seed(u, v):
+            """Get seed value for edge u→v, or None."""
+            if (u, v) in seed:
+                return seed[(u, v)]
+            if (v, u) in seed:
+                return -seed[(v, u)]
+            return None
 
-        # For tree edges without values, set to 0
-        for edge in tree_edges:
-            u, v = edge
-            key = (u, v)
-            rev = (v, u)
-            if key not in edge_values and rev not in edge_values:
-                edge_values[key] = 0.0
+        # Propagate potentials along tree
+        potentials = {root: 0.0}
+        for node in order:
+            if node == root:
+                continue
+            p = parent[node]
+            # edge from parent to node
+            sv = get_seed(p, node)
+            if sv is not None:
+                potentials[node] = potentials[p] + sv
+            else:
+                # No seed for this tree edge; potential unchanged (edge value = 0)
+                potentials[node] = potentials[p]
 
-        # Non-tree edges: assign 0 (consistent with face closure on tree)
-        non_tree = [e for e in self._edges if e not in tree_edges]
-        for edge in non_tree:
-            u, v = edge
-            key = (u, v)
-            rev = (v, u)
-            if key not in edge_values and rev not in edge_values:
-                edge_values[key] = 0.0
+        # Compute all edge values from potentials
+        edge_values = {}
+        for u, v in self._edges:
+            edge_values[(u, v)] = potentials[v] - potentials[u]
 
         return edge_values
 
