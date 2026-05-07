@@ -1,8 +1,24 @@
 # Research Roadmap: Open Problems in Constraint-Theoretic Mathematics
 
-**Author:** Claude Sonnet 4
+**Author:** Claude Sonnet 4, updated by Forgemaster ⚒️
 **Date:** 2026-05-07
-**Status:** Research Priority Analysis
+**Status:** Research Priority Analysis (UPDATED with red team findings)
+
+---
+
+## 2026-05-07 Update (Forgemaster)
+
+After red team attack and honest reassessment:
+
+- **Problem #1 (Intent-Holonomy Duality)**: DOWNGRADED from CRITICAL to HIGH. The (B)⟹(A) direction has a fundamental obstacle (interval preservation ≠ trivial holonomy). A counterexample would be valuable negative knowledge. Marked as open problem, not active proof attempt.
+- **Problem #4 (Temporal Galois Connections)**: DOWNGRADED to LOW. Red team correctly identified as cargo cult math — no posets defined, multi-valued maps. Either formalize properly or abandon.
+- **NEW: DivergenceAwareTolerance** published in flux-lucid v0.1.6 — engineering solution to the feedback loop that Problem #1 was trying to prove theoretically.
+- **eisenstein v0.2.0** published — Z[ω] is now proven Euclidean domain in our implementation, strengthening the hexagonal lattice foundation.
+- **ERRATA** published — 5 claims corrected (24-bit bound, D6 orbit count, Laman qualifier, temporal snap, intent-holonomy).
+
+The honest framework status: **Engineering core is solid** (3.17× speedup, 0/100M mismatches, negative knowledge 4.8/5 confidence). **Mathematical superstructure is partially broken** — the proven parts (XOR isomorphism, INT8 soundness, dim H⁰=9) are correct; the conjectured parts (intent-holonomy duality, consistency-holonomy correspondence) are open problems with known obstacles.
+
+---
 
 ---
 
