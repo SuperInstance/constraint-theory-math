@@ -1,8 +1,58 @@
+# Intent-Holonomy Duality: Honest Status
+
+**Date:** 2026-05-07
+**Status:** ONE DIRECTION PROVEN, CONVERSE IS OPEN PROBLEM
+**Confidence:** (A)⟹(B) ~90%, (B)⟹(A) ~30%
+
+---
+
+## What's Actually Proven
+
+### (A)⟹(B): Global Consistency ⟹ Interval Preservation [MOSTLY PROVEN]
+
+If H⁰(X,I) ≠ ∅ (there exists a globally compatible intent assignment), then for every cycle γ, the holonomy transformation satisfies Hol_ω(γ)(s_{γ(0)}) = s_{γ(0)} for the specific global section point s.
+
+**Caveat:** This shows holonomy fixes the section point, not that it preserves the entire interval. The gap between "fixes one point" and "preserves the interval" is non-trivial and requires additional assumptions (e.g., that the transport maps are order-preserving on intervals).
+
+### (B)⟹(A): Interval Preservation ⟹ Global Consistency [UNPROVEN]
+
+This direction requires constructing a global section from interval preservation on cycles. The fundamental difficulty:
+
+1. **Interval preservation ≠ trivial holonomy.** Hol_ω(γ)(I) ⊆ I does not imply Hol_ω(γ) = identity. Example: I = [-1,1], Hol = 0.5·I maps I into I but isn't the identity.
+
+2. **Path independence fails.** Two different paths from r to v can give different values even with interval preservation, because the holonomy can shrink the interval differently along different paths.
+
+3. **Fixed-point strengthening needed.** To make (B)⟹(A) work, you need to show that interval preservation forces the holonomy to have a fixed point, and then use that fixed point to construct a consistent section. This requires assumptions about the transport maps that haven't been formalized.
+
+## Why This Is Hard
+
+The duality would be a genuine mathematical contribution if proven. It connects:
+- Sheaf cohomology (global sections) 
+- Holonomy theory (cycle compatibility)
+- Constraint satisfaction (interval propagation)
+
+The obstacle is the same one that appears in gauge theory: local consistency (flat holonomy) is necessary but not sufficient for global trivialization without simply-connectedness assumptions. Our trust graphs have cycles, so we can't assume simply-connectedness.
+
+## Honest Assessment
+
+This is an **open problem**, not a theorem. The (A)⟹(B) direction is "mostly proven" with a small gap about point-vs-interval preservation. The (B)⟹(A) direction has a fundamental obstacle that requires new ideas.
+
+**What would make this a real theorem:**
+1. Formalize the class of transport maps where interval preservation implies fixed-point existence
+2. Show that our specific GL(9) transport maps fall into this class
+3. Or find a counterexample where interval preservation holds but no global section exists
+
+**Red team note:** A counterexample to (B)⟹(A) would be valuable negative knowledge — it would tell us exactly when runtime holonomy checking is insufficient and we need compile-time guarantees.
+
+## Historical Attempt (Archived Below)
+
+---
+
 # Intent-Holonomy Duality Theorem: Rigorous Proof Attempt
 
 **Author:** Claude Sonnet 4
 **Date:** 2026-05-07
-**Status:** PROOF ATTEMPT (where DeepSeek v4-pro failed after 16000+ reasoning tokens)
+**Original Status:** PROOF ATTEMPT
 
 ---
 
