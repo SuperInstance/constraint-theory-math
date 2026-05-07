@@ -1,0 +1,15 @@
+**Theorem (The Galois Unification Principle)**  
+Every fact listed is an instance of a *Galois connection* between two partially ordered sets induced by a binary relation. Specifically, for any relation \(R \subseteq X \times Y\), the maps  
+\[
+\alpha(A) = \{ y \in Y : \forall a \in A, (a,y) \in R \}, \quad \beta(B) = \{ x \in X : \forall b \in B, (x,b) \in R \}
+\]  
+form a Galois connection between the power sets \(\mathcal{P}(X)\) and \(\mathcal{P}(Y)\) (ordered by inclusion). The six facts arise as special cases:
+
+1. **Fact 1:** \(X =\) signed 32-bit integers, \(Y =\) unsigned 32-bit integers, \(R = \{(x,y) : x \oplus 0x80000000 \leq_{\text{unsigned}} y\}\). The Galois connection collapses to an order isomorphism, giving the group isomorphism.  
+2. **Fact 2:** \(X = Y = [-127,127]\), \(R = \leq\). The identity map is a trivial Galois connection.  
+3. **Fact 3:** \(X =\) set of items, \(Y =\) set of hash functions, \(R = \{(i,h) : h(i) = 1\}\). The Galois-closed sets form a Heyting algebra (intuitionistic logic), explaining the failure of excluded middle.  
+4. **Fact 4:** \(X = [0,1]\) (stakes), \(Y = \{\text{low, medium, high, critical}\}\), \(R = \{(s,p) : s \text{ lies in the interval associated to } p\}\). This yields a quantization functor as a Galois connection between continuous and discrete orders.  
+5. **Fact 5:** \(X = [0,1]^9\) (intent vectors), \(Y = (0,1]\) (tolerances), \(R = \{(v,t) : \cos\_\text{sim}(v, \text{ref}) \geq t\}\). The metric structure emerges from the closure operators.  
+6. **Fact 6:** \(X =\) loops in a trust graph, \(Y = GL(9)\), \(R = \{(l,g) : \text{holonomy}(l) = g\}\). Trivial holonomy corresponds to the Galois-closed set of identity, linking to first cohomology.
+
+Thus, the **novel theorem** is that all six phenomena—integer comparison, range checking, Bloom filters, mixed-precision quantization, intent vector alignment, and holonomy consensus—are unified under the single categorical framework of *Galois connections*. This deep structure reveals that the same polarity between objects and attributes governs order, logic, quantization, metrics, and group cohomology.
