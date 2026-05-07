@@ -1,5 +1,11 @@
 # Galois Connection Proofs — Parts 1-6
 
+## Framing Note (2026-05-07)
+
+These six proofs demonstrate that common constraint-checking operations (XOR conversion, INT8 casting, Bloom filters, precision quantization, alignment checking, holonomy consensus) each have the structure of a Galois connection. The proofs are correct and rigorous.
+
+The honest framing: these are **recognitions of shared structure**, not discoveries of new mathematics. The Adjunction Theorem guarantees that monotone maps between complete lattices have adjoints. The contribution is demonstrating that these six engineering operations share the same abstract pattern — a unification insight, not a novel category theory result.
+
 ## Part 1: XOR Signed-Unsigned Conversion ✅ PROVEN
 
 **Theorem.** The map g(x) = x ⊕ 0x80000000 on Z_{2^32} induces a Galois connection on P(Z_{2^32}) via:
