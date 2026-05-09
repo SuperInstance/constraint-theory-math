@@ -1,5 +1,15 @@
 # Constraint Theory Math
 
+
+## Meta
+
+**Domain:** constraint-theory
+**Depends on:** —
+**Depended by:** —
+**Implements:** Sheaf cohomology, Heyting-valued logic, and GL(9) holonomy: unified mathematical...
+**Related:** —
+
+
 **Math for people who check bounds for a living.**
 
 We built a mixed-precision constraint checker — sometimes int8 for speed, sometimes int32 for range, sometimes both in parallel — and discovered it sits on top of genuine mathematical structure. Galois connections, sheaf cohomology, Heyting algebras, holonomy bundles on GL(9). This repo is the proof, the errata, and the honest accounting of what we still don't know.
