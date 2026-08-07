@@ -45,6 +45,8 @@ def weyl_orbit(a: int, b: int) -> List[Tuple[int, int]]:
     # Units of Z[ω]: ±1, ±ω, ±ω²  (6 units)
     # And conjugation: a + bω → a + bω² = (a-b) - bω
     
+    # Conjugate of (a,b) is (a-b, -b)
+    ca, cb = a - b, -b
     pairs = [
         (a, b),           # identity
         (-b, a - b),      # ×ω
@@ -52,13 +54,13 @@ def weyl_orbit(a: int, b: int) -> List[Tuple[int, int]]:
         (-a, -b),         # ×(-1)
         (b, b - a),       # ×(-ω)
         (a - b, a),       # ×(-ω²)
-        # Conjugation + units
-        (a, a - b),       # conjugate
-        (b - a, -b),      # conjugate ×ω
-        (-a, b - a),      # conjugate ×ω²
-        (-a, b),          # conjugate ×(-1) = -(conjugate)
-        (b, a),           # conjugate ×(-ω)
-        (a - b, -a),      # conjugate ×(-ω²)
+        # Conjugation + units (applied to conjugate (ca, cb) = (a-b, -b))
+        (ca, cb),           # conjugate
+        (-cb, ca - cb),    # conjugate ×ω
+        (cb - ca, -ca),    # conjugate ×ω²
+        (-ca, -cb),        # conjugate ×(-1)
+        (cb, cb - ca),     # conjugate ×(-ω)
+        (ca - cb, ca),     # conjugate ×(-ω²)
     ]
     
     for p in pairs:
