@@ -125,13 +125,15 @@ Hence Φ is an isomorphism, and dim H⁰(Γ, V) = dim V_r = 9. ∎
 
 **Corollary 2.** With interval constraints (stalks I_v = product of 9 intervals), H⁰(Γ, I) is a convex polytope, potentially of dimension < 9 if constraints are tight.
 
-**Corollary 3.** For a general connected graph with β₁ independent cycles:
+**Corollary 3.** ~~For a general connected graph with β₁ independent cycles: dim H⁰(Γ, V) ≤ 9 + 9·β₁(Γ). Each cycle adds at most 9 degrees of freedom that must satisfy the holonomy consistency condition.~~
+
+**Corollary 3 (CORRECTED 2026-10-03, see ERRATA):** For any connected graph, restriction to a root is injective (spanning-tree propagation), so cotree constraints can only remove dimensions:
 
 ```
-dim H⁰(Γ, V) ≤ 9 + 9·β₁(Γ)
+dim H⁰(Γ, V) = dim Fix(Hol_r) ≤ 9
 ```
 
-Each cycle adds at most 9 degrees of freedom that must satisfy the holonomy consistency condition.
+where Hol_r is the holonomy group at the root and Fix its fixed-point subspace. Cycles never add dimensions; generically they remove all of them. Proof: `proofs/PROOF-DIM-H0-FIXED-SPACE.md`; numerical pins: `tests/test_dim_h0_fixed_space.py` (63/63). The "9 + 9·β₁" bound was true but non-tight, and its mechanism ("cycles add degrees of freedom") was backwards — the intuition belongs to the *interval* sheaf's slack (Problem 1's open setting), not to linear dimension.
 
 **Practical meaning.** A fleet of k agents on a tree topology requires exactly 9 continuous parameters for a globally consistent intent state. Adding redundant communication paths (cycles) does not increase dimension but adds consistency constraints.
 
@@ -245,7 +247,7 @@ The "information loss" in the counit α(β(b)) ≤ b is the key:
 
 **(b)** For a tree with trivial bundle: dim H⁰ = 9 (Theorem 3, proven).
 
-**(c)** For a general graph: dim H⁰ ≤ 9 + 9·β₁(X).
+**(c)** For a general graph: dim H⁰ = dim Fix(Hol_r) ≤ 9 (CORRECTED 2026-10-03 — the old "≤ 9 + 9·β₁(X)" bound was non-tight; cycles only cut dimensions. See ERRATA and proofs/PROOF-DIM-H0-FIXED-SPACE.md).
 
 **(d)** Stakes provides a monotone reduction functor from the category of constraint systems to the category of interval sheaves, with higher stakes → narrower intervals → fewer global sections (more restrictive = more precise).
 

@@ -1,9 +1,18 @@
 # ERRATA: Corrections to Published Claims
 
-**Date:** 2026-05-07
-**Source:** Red team attack #5 + internal ANALYSIS.md review
+**Date:** 2026-10-03
+**Source:** OpenClaw fleet foundational-math lane (dim-H⁰ closed form)
+
+### 6. Cycle "dimension budget" — MECHANISM WRONG (non-tight bound)
+- **Claim:** For graphs with β₁ cycles, dim H⁰ ≤ 9 + 9·β₁, and "each cycle adds at most 9 degrees of freedom (a full 9-vector of slack)" (README §Sheaf Cohomology; PAPER.md Corollary 3; this file's Corollary 3)
+- **Reality:** For any connected graph, spanning-tree propagation makes restriction-to-root injective, so dim H⁰ ≤ 9 ALWAYS, with the sharp closed form dim H⁰ = dim Fix(Hol_r) (fixed points of the cycle-holonomy group at the root). Cycles can only REMOVE dimensions — a single generic cycle kills all 9. The "cycles add freedom" intuition belongs to the *interval/tolerance* sheaf (fiber slack/width, Problem 1's open setting), not to linear dimension.
+- **Fix:** Superseded, not erased: strikethrough + corrected statement at all three sites. New proof: proofs/PROOF-DIM-H0-FIXED-SPACE.md. Numerical pins (incidence nullity == fixed-space intersection, 60 random graphs + trees + triangles + GL(9) spot check): tests/test_dim_h0_fixed_space.py — 63/63 PASS.
+- **Status:** Documentation/proof fix, 2026-10-03. The old bound remains technically true (it dominates 9), which is precisely why it survived — a bound too loose to be wrong.
 
 ---
+
+**Date:** 2026-05-07
+**Source:** Red team attack #5 + internal ANALYSIS.md review
 
 ## Corrections Required
 

@@ -98,8 +98,7 @@ This is [negative knowledge](https://github.com/SuperInstance/negative-knowledge
 We model a fleet as a sheaf on a graph. The global sections H⁰ count the degrees of freedom available for consistent state. The first cohomology H¹ counts the obstacles to global consistency — cycles in the graph that impose nontrivial constraints.
 
 - dim H⁰ = 9 on trees
-- For graphs with β₁ cycles, dim H⁰ ≤ 9 + 9·β₁
-- Each cycle adds at most 9 degrees of freedom (a full 9-vector of slack)
+- For graphs with β₁ cycles: ~~dim H⁰ ≤ 9 + 9·β₁~~ — **corrected 2026-10-03** (see ERRATA): **dim H⁰ = dim Fix(Hol) ≤ 9 always** — restriction to a root is injective, so cycles can only *remove* dimensions. The sharp closed form is `dim H⁰ = dim Fix(Hol_r)` ([proof](proofs/PROOF-DIM-H0-FIXED-SPACE.md), numerically pinned in `tests/test_dim_h0_fixed_space.py`, 63/63)
 
 ---
 
