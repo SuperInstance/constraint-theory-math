@@ -37,6 +37,11 @@ Since Φ is an isomorphism: **dim H⁰(Γ, V) = dim V_r = 9**. ∎
 
 2. **With interval constraints:** H⁰(Γ, I) is a convex polytope (product of 9 intervals, potentially smaller than ℝ⁹ depending on constraint widths).
 
-3. **For general graphs:** The dimension is at most 9 + 9·β₁(Γ), where β₁ is the first Betti number (number of independent cycles). Each cycle adds at most 9 degrees of freedom (one per dimension) that must be consistent with holonomy.
+3. **For general graphs (SUPERSEDED 2026-10-03 — see ERRATA and
+   proofs/PROOF-DIM-H0-FIXED-SPACE.md):** the sharp law is
+   dim H⁰(Γ, V) = dim Fix(Hol_r) ≤ 9. The "≤ 9 + 9·β₁" bound recorded here was
+   true but non-tight, and its mechanism was backwards: cycles never add
+   dimensions — restriction to a root is injective by spanning-tree
+   propagation, and cotree constraints can only remove them.
 
 4. **Practical meaning:** A fleet of k agents on a tree topology requires only 9 continuous parameters to specify a globally consistent intent state. Adding cycles (redundant communication paths) adds consistency constraints but not new degrees of freedom.
